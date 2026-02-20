@@ -1,0 +1,144 @@
+geneset,gene,HUGO_SYMBOL,,synonyms
+Inh NK receptors,CD94,KLRD1,Previous symbol,KLRD1
+Inh NK receptors,NKG2A,KLRC1,Unmatched,"KLRC1, CD159a"
+Inh NK receptors,ILT2,LILRB1,Unmatched,"LILRB1, LI-1, CD85j, PIRB, MIR7"
+Inh NK receptors,KLRG-1,KLRG1,Unmatched,"CLEC15A , MAFAL"
+Inh NK receptors,LAIR-1,LAIR1,Alias symbol,"CD305, HLAIR1"
+Inh NK receptors,NKRP1A,KLRB1,Unmatched,"KLRB1, CLEC5B, CD161"
+Act NK receptors,FcRIII,FCGR3A ,Unmatched,"FCGR3A , FcgammaRIIIa , CD16,FCG3"
+Act NK receptors,NKP30,NCR3,Alias symbol,"NCR3, 1C7, CD337, LY117, MALS "
+Act NK receptors,NKP44,NCR2,Unmatched,"NCR2, LY95, CD336"
+Act NK receptors,NKP46,NCR1,Alias symbol,"NCR1, CD335, LY94"
+Act NK receptors,NKP65,KLRF2,Alias symbol,KLRF2
+Act NK receptors,NKP80,KLRF1,Alias symbol,"KLRF1, CLEC5C, ML"
+Act NK receptors,nkg2d,KLRK1,Alias symbol,"KLR, KLRK1, CD314, D12S2489E "
+Act NK receptors,NKG2C,KLRC2,Alias symbol,"KLRC2, CD159c"
+Act NK receptors,NKG2E,KLRC3,Unmatched,KLRC3
+Act NK receptors,2B4,CD244,Alias symbol,"CD244, NKR2B4, SLAMF4, NAIL, H2B4"
+Act NK receptors,DNAM-1,CD226,Alias symbol,"CD226, TLiSA1, PTA1"
+Act NK receptors,41BB,TNFRSF9,Unmatched,"CD137, TNFRSF9, ILA"
+Act NK receptors,ICOS,ICOS,Approved symbol,"CD278, AILIM, CVID1"
+Act NK receptors,OX40,TNFRSF4,Alias symbol,"TNFRSF4, CD134, OX40, ATC35"
+HLA-I,HLA-A,HLA-A,Approved symbol,
+HLA-I,HLA-B,HLA-B,Approved symbol,
+HLA-I,HLA-C,HLA-C,Approved symbol,
+HLA-I,HLA-E,HLA-E,Approved symbol,
+HLA-I,HLA-F,HLA-F,Approved symbol,
+HLA-I,HLA-G,HLA-G,Approved symbol,
+HLA-II,HLA-DR,HLA-DRA,added the different genes,HLA-DRA1
+HLA-II,HLA-DR,HLA-DRB5,added the different genes,
+HLA-II,HLA-DR,HLA-DRB1,added the different genes,
+HLA-II,HLA-DR,HLA-DRB3,added the different genes,
+HLA-II,HLA-DR,HLA-DRB4,added the different genes,
+HLA-II,HLA-DQ,HLA-DQA1,added the different genes,
+HLA-II,HLA-DQ,HLA-DQB1,added the different genes,
+HLA-II,HLA-DQ,HLA-DQA2,added the different genes,
+HLA-II,HLA-DQ,HLA-DQB2,added the different genes,
+HLA-II,HLA-DQ,HLA-DQB3,added the different genes,
+HLA-II,HLA-DP,HLA-DPA1,added the different genes,
+HLA-II,HLA-DP,HLA-DPB1,added the different genes,
+Inh Ligands,UL18,RPL5,Alias symbol,"PPP1R135, UL18, L5, MSTP030"
+Inh Ligands,LLT1,CLEC2D,Alias symbol,"CLEC2D, LLT1, CLAX, OCIL"
+Act Ligands,B7H6,NCR3LG1,Unmatched,NCR3LG1
+Act Ligands,BAG6,BAG6,Approved symbol,"BAT3, G3, D6S52E"
+Act Ligands,MLL5,KMT2E,Previous symbol,"KMT2E, SETD5B, MLL5, NKp44L, ODLURO"
+Act Ligands,Nidogen-1,NID1,Unmatched,NID1
+Act Ligands,Properdin,CFP,Unmatched,"PFC, BFD, PFD"
+Act Ligands,HN,MT-RNR2,Alias symbol,"MTRNR2, HN, L-RRNA, HNM, RNR2"
+Act Ligands,KACL,CLEC2A,Alias symbol,"CLEC2A, PILAR, INPE5792, UNQ5792"
+Act Ligands,AICL,CLEC2B,Alias symbol,"AICL, CLECSF2, IFNRG1"
+Act Ligands,MICA,MICA,Approved symbol,PERB11.1
+Act Ligands,MICB,MICB,Approved symbol,PERB11.2
+Act Ligands,ULBP1,ULBP1,Approved symbol,"ULBP1, RAET1L, NKG2DL1, ALCAN.BETA, N2DL1"
+Act Ligands,ULBP2,ULBP2,Approved symbol,"RAET1H, NKG2DL2, RAET1L, ALCAN-ALPHA, N2DL2"
+Act Ligands,ULBP3,ULBP3,Approved symbol,"RAET1N, ULBP3, NKG2DL3-ALCAN-GAMMA, N2DL3"
+Act Ligands,ULBP4,RAET1E,Alias symbol,"RAET1E, LETAL, ULBP4, BA350J20.7, NKG2DL4, RAET1E2, RL-4"
+Act Ligands,ULBP5,RAET1G,Alias symbol,"RAET1G, ULBP5"
+Act Ligands,ULBP6,RAET1L,Unmatched,"RAET1L, ULBP6, RAET1H"
+Act Ligands,CD48,CD48,Approved symbol,"SLAMF2, BLAST, MCD48, HCD48, BCM1, TCT, MEM-102"
+Act Ligands,CD112,NECTIN2,Alias symbol,"NECTIN2, PRR2, PVRR2, CD112, PVRL2, HVEB"
+Act Ligands,CD155,PVR,Alias symbol,"PVR, NECL5, CD155, TAGE4, HVED, PVS"
+Act Ligands,CD137L,TNFSF9,Alias symbol,"TNFSF9, 4-1BBL, CD137L, TNLG5A"
+Act Ligands,ICOSL,ICOSLG,Alias symbol,"B7RP-1, B7.H2M CD275, GL50, B7H, LICOS"
+Act Ligands,OX40-L,TNFSF4,Unmatched,"TNFSF4, OX40-LM, CD252, TXGP1, GP34, CD134L, TNLG2B"
+Emerging checkpoints,B7H3,CD276,Alias symbol,"CD276, B7H3, B7RP2"
+Emerging checkpoints,TIGIT,TIGIT,Approved symbol,"VSIG9, TIGIT, VSTM3, WUCAM"
+Emerging checkpoints,TIM3,HAVCR2,Alias symbol,"TIM3, TIMD3, CD366, FLJ14428, KIM3, SPTCL"
+Emerging checkpoints,LAG3,LAG3,Approved symbol,"FDC, CD223"
+Emerging checkpoints,PD1,PDCD1,Alias symbol,"PD1, CD279, HSLE1, SLEB2, HPD1, HPDL"
+Emerging checkpoints,CTLA4,CTLA4,Approved symbol,"CD152, GSE, CD, CELIAC3, IDDM12, ALPS5, GRD4"
+Emerging checkpoints,PVRIG,PVRIG,Approved symbol,"C7orf15, CD112R, MGC2463"
+Emerging checkpoints,TACTILE,CD96,Alias symbol,"CD96, TACTILE"
+Emerging checkpoints ligands,CD133,NECTIN3,,"NECTIN3, CD133, PVRR3, PVRL3, PPR3, CDw113"
+Emerging checkpoints ligands,GALECTIN9,LGALS9,,"LGALS9A, HUAT"
+Emerging checkpoints ligands,HMGB1,HMGB1,,"HMGB1, HMG3, HMG1"
+Emerging checkpoints ligands,CEACAM1,CEACAM1,,"BGP1, BGPI, CD66"
+Emerging checkpoints ligands,L-sectin,CLEC4G ,,"LSECTIN, CLEC4G, UNQ431, DTTR431, LP2698"
+Emerging checkpoints ligands,FGL1,FGL1,,"HPS, HFREP1, LFIRE1"
+Emerging checkpoints ligands,PD-L1,CD274 ,,"CD274, PDL1, B7H1, PDCD1LG1"
+Emerging checkpoints ligands,PD-L2,PDCD1LG2 ,,"CD273, PDL2, B7-DC"
+Emerging checkpoints ligands,B7-1,CD80,,"CD80, CD28LG1, B7.1, LAB7, BB1"
+Emerging checkpoints ligands,B7-2,CD86,,"CD28LG2, FUN1, BU63, B70, LAB76"
+Emerging checkpoints ligands,CD111,NECTIN1,,"PRR1, CLPED1, PVRR1, PVRL1, HVEC, HV1S"
+Inh KIR-L,KIR2DL1 ,KIR2DL1 ,,"CD158A, NKAT1, KIR22A"
+Inh KIR-L,KIR2DL2 ,KIR2DL2 ,,"CD158B1, NKAT6"
+Inh KIR-L,KIR2DL3 ,KIR2DL3 ,,"CD158B2, NKAT2, P58, CD158B, KIRCL23, GL183, KIR2DL1"
+Inh KIR-L,KIR2DL4 ,KIR2DL4 ,,"CD158D, KIR103"
+Inh KIR-L,KIR2DL5A,KIR2DL5A,,"CD158F, KIR2DL,KIR2DL5.1, KIRD2DL5.3, CD158F1"
+Inh KIR-L,KIR2DL5B ,KIR2DL5B ,,"CD158F, KIR2DL5B, KIR2DLX, KIR2DL5.2, KIR2DL5.3, KIRD2DL5.4"
+Inh KIR-L,KIR3DL1 ,KIR3DL1 ,,"CD158E1, NKB1, NKB1B, NKAT3, AMB11, KIR, KIR2DL5B"
+Inh KIR-L,KIR3DL2 ,KIR3DL2 ,,"CD158K, NKAT4, 3DL2, P140"
+Inh KIR-L,KIR3DL3 ,KIR3DL3 ,,"CD158Z, KIR3DL7, KIRC1, KIR44, KIR2DL5B"
+Act KIR-L,KIR2DS1 ,KIR2DS1 ,,"CD158H, EB6ActII, EB6ActI"
+Act KIR-L,KIR2DS2 ,KIR2DS2 ,,"CD158J, NKAT5"
+Act KIR-L,KIR2DS3,KIR2DS3,,NKAT7
+Act KIR-L,KIR2DS4 ,KIR2DS4 ,,"CD158I, KKA3, NKAT8, KIR412, KIR1D"
+Act KIR-L,KIR2DS5 ,KIR2DS5 ,,"CD158G, KIR2DS5, NKAT9"
+Act KIR-L,KIR3DS1 ,KIR3DS1 ,,"NKAT10, CD158E2, KIR-123FM"
+NK activation marker,CD57,B3GAT1,,"B3GAT1, GLCATP, CD57, LEU7, NK1, HNK1"
+NK activation marker,CD38,CD38,,"CD38, CADPR1, ADPRC1, T10"
+NK activation marker,PERF,PRF1,,"PFP, P1, HPLH2"
+NK activation marker,GzmA,GZMA,,"CTLA3, HFSP, HF"
+NK activation marker,GzmB,GZMB,,"GZMB, CTSGL1, CGL1, SECT, HLP, CTLA1, CCPI, CSPB, GRB, CTLA1"
+NK activation marker,GzmH,GZMH ,,"GZMH, CCPX, CSPC, CTSGL2, CGL2, CTLA1"
+NK activation marker,GzmK,GZMK,,"TRYP2, PRSS"
+NK activation marker,GzmM,GZMM,,"GZMM, MET1, LMET1"
+NK activation marker,CD59,CD59,,"HRF20, MACIF, MIC11, MSK21, EJ16, EJ30, G344, MIN1, MIN2, MIN3, MIRL, HRF20, MEM43"
+SLAMF  family,SLAMF1,SLAMF1,,"CD150, SLAM"
+SLAMF  family,SLAMF3,LY9,,"LY9, SLAMF3, CD229, MLY9, HLY9"
+SLAMF  family,SLAMF5,CD84,,"SLAMF5, HCD84, MCD84, LY9B"
+SLAMF  family,SLAMF6,SLAMF6,,"NTBA, KALI, SF200, Ly108, CD352"
+SLAMF  family,SLAMF7,SLAMF7,,"CRACC, CS1, CD319, 19A"
+SIGLEC family,Siglec3,CD33,,"CD33, SIGLEC3, P67, FLJ00391, GP67"
+SIGLEC family,Siglec5,SIGLEC5 ,,"SIGLEC5, CD33L2, CD170, OBBP2"
+SIGLEC family,Siglec7,SIGLEC7,,"SIGLEC7, CD328, QA79, SIGLEC19P, SIGLECP2, CDw328, AIRM1, P75"
+SIGLEC family,SIGLEC9,SIGLEC9,,"CD329, FOAP9, SIGLEC9, OBBP-LIKE"
+CD300 family,CD300A,CD300A,,"CMRF35H, IGSF12, Irp60, IRC1, IRC2, CLM8, IgSF12, IRp60"
+CD300 family,CD300B,CD300LB,,"TREM5, CLM7, IREM3, CMRF35A2, LMIR5"
+CD300 family,CD300C,CD300C,,"CMRF35A, IGSF16, LIR"
+CD300 family,CD300D,CD300LD,,"CD300D, CMRF35A4, CLM4, CLM5"
+CD300 family,CD300E,CD300E,,"CD300E, CD300LE, IREM2, CLM2, CMRF35A5, PlgR2"
+CD300 family,CD300F,CD300LF,,"CD30f, IGSF13, IREM1, NKIR, CLM1, IgSF13, LMIR3"
+CD300 family,CD300G,CD300LG,,"TREM4, CLM9, nepmucin"
+CD300 family,CD300H,CD300H,,CD300H
+Act Ligands,CD58,CD58,,"LFA3, Ag3"
+Act NK receptors,CD2,CD2,,"SRBC, LFA3, LFA2, T11"
+Act NK receptors,DAP12,TYROBP,,"DAP12, KARAP, PLOSL, PLOSL1"
+Act NK receptors,CD3ZETA,CD247,,"TCRZ, CD3Z, IMD25"
+Act NK receptors,DAP10,HCST ,,"DAP10, HCST, KAP10, PIK3AP"
+Act NK receptors,CRTAM,CRTAM,,"CD355, CRTAM"
+Inh Ligands,PCNA,PCNA,,"Cyclin, ATLD2"
+Act Ligands,IGSF4A,CADM1,,"SYNCAM, IGSF4, NECL2, SYNCAM1, RA175, IGSF4, TSLC1, ST17, BL2, STSLC1, SgIGSF"
+Act NK receptors,CD27,CD27,,"CD27, TNFRSF7, S152, Tp55, T14"
+Act NK receptors,CD160,CD160,,"CD160, BY55, NK28, NK1"
+Act Ligands,CD70,CD70,,"CD70, CD27L, TNFSF7, TNLG8A, LPFS3"
+Inh Ligands,CD72,CD72,,"CD72, LYB2"
+Inh Ligands,OCIL,CLEC2D,,"OCIL, CLEC2D, LLT1, CLAX"
+Inh Ligands,GRB2,GRB2,,"NCKAP2, ASH, MSTP084, HT027"
+Inh Ligands,TIM1,HAVCR1,,"HAVCR1, TIM1, TIMD1, CD365, KIM1"
+Inh Ligands,TIM4,TIMD4,,"TIM4, TIMD4, SMUCKLER"
+Inh NK receptors,CD100,SEMA4D,,"CD100, SEMAJ, FLJ39737, BB18, GR3, A8, COLL4"
+Inh Ligands,CEACAM5,CEACAM5,,"CD66e, CEA, CEACAM5"
+Act NK receptors,STAT1,STAT1,,"STAT1 , STAT91, CANDF7, IMD31A, IMD31B, IMD31C"
+Inh NK receptors,B2M,B2M,,IMD43
+NK activation marker,IFNG,IFNG,,IFNG
