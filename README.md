@@ -31,20 +31,20 @@ The transcriptomic datasets analyzed in this study are publicly available from:
 
 ---
 
-## Requirements
+# Requirements
 
-# Software
+## Software
 R ≥ 4.2
 
-# R Packages
+## R Packages
 Main packages used:
 
 tidyverse
 pheatmap
 ggplot2
 gridExtra
-gtable
 stringr
+ConsensusTME
 
-# Code Availability Statement
+## Code Availability Statement
 All custom scripts used to generate the results reported in the manuscript are available in this repository.
