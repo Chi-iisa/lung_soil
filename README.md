@@ -18,7 +18,7 @@ The code provided here reproduces the main computational analyses and figures pr
 
 # Repository Structure
 - The data folder contains metadata used for downstream analyses.
-- The data-raw folder contains the transcriptomic data matrices for each dataset used in this study.
+- The raw-data folder contains the transcriptomic data matrices for each dataset used in this study.
 - The functions folder contains R files with custom functions and some supporting variables.
 - The scripts folder contains R files used to generate the figures and supplementary figures.
 
