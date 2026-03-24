@@ -4,16 +4,6 @@
 ###
 ### 
 
-library(ConsensusTME)
-library(ggplot2)
-library(gplots)
-library(reshape)
-library(dplyr)
-library(pheatmap)
-library(grid)
-library(gridExtra)
-library(dendextend)
-
 load('data/datasets_lung_soil.RData')
 source("functions.R")
 source("variables.R")
@@ -85,7 +75,7 @@ boxplot_axis <- function(clin_data, exp_data, gene, y_axis = FALSE, y_lim = NULL
           "Liver" = "darkorange")) +
         labs(y = if (y_axis) "Enrichment score" else NULL,
              x = gene, color = NULL) +
-        theme_classic(base_size = 10) +
+        theme_classic(base_size = 7.5) +
         theme(
           legend.position = "right",
           axis.text.x = element_blank(),
@@ -94,7 +84,7 @@ boxplot_axis <- function(clin_data, exp_data, gene, y_axis = FALSE, y_lim = NULL
         annotate("text", x = Inf, y = Inf, 
                  label = paste('p = ', ifelse(pv < 1e-5, format(pv, scientific = TRUE, digits = 4),
                                               round(pv, digits = 5))),
-                 hjust = 1.1, vjust = 1.3, size = 3.5)
+                 hjust = 1.1, vjust = 1.3, size = 2.7)
       
       if (!is.null(y_lim)) {
         g <- g + coord_cartesian(ylim = y_lim)
@@ -109,7 +99,7 @@ boxplot_axis <- function(clin_data, exp_data, gene, y_axis = FALSE, y_lim = NULL
         )
       } else {
         g <- g + theme(
-          axis.text.y = element_text(size = 8)
+          axis.text.y = element_text(size = 7.1)
         )
       }
       return(g)
@@ -122,14 +112,14 @@ boxplot_axis <- function(clin_data, exp_data, gene, y_axis = FALSE, y_lim = NULL
                                  y = .data[[gene]],
                                  color = MET_SITE)) +
         stat_boxplot(geom = "errorbar", width = 0.2) +
-        geom_boxplot(fill = "white", size = 0.8) +
+        geom_boxplot(fill = "white", size = 0.7) +
         
         scale_color_manual(values = c(
           "Lung" = "green3",
           "Liver" = "darkorange")) +
-      labs(y = if (y_axis) "Enrichment score" else NULL,
+        labs(y = if (y_axis) "Enrichment score" else NULL,
              x = gene, color = NULL) +
-        theme_classic(base_size = 10) +
+        theme_classic(base_size = 7.5) +
         theme(
           legend.position = "right",
           axis.text.x = element_blank(),
@@ -138,7 +128,7 @@ boxplot_axis <- function(clin_data, exp_data, gene, y_axis = FALSE, y_lim = NULL
         annotate("text", x = Inf, y = Inf, 
                  label = paste('p = ', ifelse(pv < 1e-5, format(pv, scientific = TRUE, digits = 4),
                                               round(pv, digits = 5))),
-                 hjust = 1.1, vjust = 1.3, size = 3.5) 
+                 hjust = 1.1, vjust = 1.3, size = 2.7) 
       
       if (!is.null(y_lim)) {
         g <- g + coord_cartesian(ylim = y_lim)
@@ -153,7 +143,7 @@ boxplot_axis <- function(clin_data, exp_data, gene, y_axis = FALSE, y_lim = NULL
         )
       } else {
         g <- g + theme(
-          axis.text.y = element_text(size = 8)
+          axis.text.y = element_text(size = 7.1)
         )
       }
       
@@ -187,30 +177,11 @@ combined <- wrap_plots(t_plots, ncol = 4) +
   plot_layout(guides = "collect") &
   theme(legend.position = "right")
 
-# ggsave(
-#   "prubas/tcell_figure2.tiff",
-#   combined,
-#   device = "tiff",
-#   width = 180,
-#   height = 130,
-#   units = "mm",
-#   dpi = 600,
-#   compression = "lzw"
-# )
-
-ggsave(
-  "figures_def2026/Fig2_A.tiff", combined, device = "tiff",
-  width = 180, height = 130, units = "mm", dpi = 600, compression = "lzw"
-)
 
 ## Figure 2b
 nk <- boxplot_axis(samples_crc, consensus,'NK cells', y_axis = TRUE)
 grid.newpage()
 grid.draw(nk)
-ggsave(
-  "figures_def2026/Fig2_B.tiff", nk, device = "tiff",
-  width = 88, height = 70, units = "mm", dpi = 600, compression = "lzw"
-)
 
 
 ## Figure 2C
@@ -252,16 +223,13 @@ p <- pheatmap(
   cluster_rows = hcl2,     
   show_rownames = TRUE,                    
   show_colnames = FALSE,                   
-  fontsize_row = 5.75,                    
+  fontsize = 6,
+  # fontsize_row = 6, 
+  fontsize_row = 3.2,
   annotation_col = annotation,             
   annotation_colors = annotation_colors,   
   legend = TRUE,
   border_color= NA,
-)
-
-ggsave(
-  "figures_def2026/Fig2_C.tiff", p, device = "tiff",
-  width = 180, height = 130, units = "mm", dpi = 600, compression = "lzw", bg = 'white'
 )
 
 
@@ -281,10 +249,7 @@ write.table(GSVA, file="results/crc_tis_signature.txt", sep="\t", col.names = T,
 file.tis.crc <-'results/crc_tis_signature.txt'
 tis.crc <- plot.tis.ips(clin_crc, file.tis.crc, 'CRC', 'TIS', y_axis = TRUE)
 grid.draw(tis.crc)
-ggsave(
-  "figures_def2026/Fig2_D.tiff", tis.crc, device = "tiff",
-  width = 88, height = 70, units = "mm", dpi = 600, compression = "lzw"
-)
+
 
 ## Figure 2E - IPS
 library(devtools)
@@ -366,7 +331,46 @@ write.table(ips,file="results/IPS_scores_crc.txt",
 file.ips.crc <-"results/IPS_scores_crc.txt"
 ips.crc <- plot.tis.ips(clin_crc, file.ips.crc, 'CRC', 'IPS', y_axis = TRUE)
 grid.draw(ips.crc)
-ggsave(
-  "figures_def2026/Fig2_E.tiff", ips.crc, device = "tiff",
-  width = 88, height = 70, units = "mm", dpi = 600, compression = "lzw"
+
+
+
+library(patchwork)
+library(cowplot)
+library(ggplotify)
+
+fig2_1 <- plot_grid(
+  combined, nk,
+  labels = c("a", "b"),
+  label_size = 14,
+  label_fontface = "bold",
+  ncol = 2, nrow = 1,
+  rel_widths = c(2,1)
+)
+fig2_1
+
+fig2_2 <- plot_grid(
+  p$gtable,  tis.crc, ips.crc,
+  labels = c("c", "d", "e"),
+  label_size = 14,
+  label_fontface = "bold",
+  ncol = 3, nrow = 1,
+  rel_widths = c(2,1,1)
+)
+fig2_2
+
+fig2 <- plot_grid(
+  fig2_1,fig2_2,
+  ncol = 1, nrow = 2
+)
+fig2
+
+fig2_background <- fig2 +
+  theme(plot.background = element_rect(fill = "white", color = NA))
+
+save_plot(
+  "figures_def2026/Figure2_v8.tiff", 
+  fig2_background,
+  base_width = 200 / 25.4,
+  base_height = 160 / 25.4, 
+  dpi = 600       
 )

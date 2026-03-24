@@ -145,16 +145,67 @@ gset.plots <- lapply(unique(geneset_sig.all),
                      function(g) gs.sign.boxplot.all(samples_all, ex_all, sig_genes_all,
                                                      geneset_sig.all,g))
 
-for (i in seq(1,length(gset.plots))){
-  print(i)
-  print(gset.plots[[i]])
-  if (!i %in% c(1,3,7)){
-    ggsave(paste0("figures_def2026/Suppl-Fig1-",i,".tiff"), device = "tiff", 
-           plot = gset.plots[[i]], width = 180, height = 52, units = "mm", dpi = 600,
-           compression = "lzw")
-  } else{
-    ggsave(paste0("figures_def2026/Suppl-Fig1-",i,".tiff"), device = "tiff", 
-           plot = gset.plots[[i]], width = ifelse(i ==3, 135, 180), height = 52*2, units = "mm", dpi = 600,
-           compression = "lzw")
-  }
-}
+
+
+library(patchwork)
+library(cowplot)
+library(ggplotify)
+
+row1 <- plot_grid(
+  gset.plots[[2]], gset.plots[[4]], gset.plots[[5]],gset.plots[[6]],
+  ncol = 4, nrow = 1,
+  rel_widths = c(2,1,0.6,0.6)
+)
+row1
+
+row2 <- plot_grid(
+  gset.plots[[3]], gset.plots[[9]], gset.plots[[10]],
+  ncol = 3, nrow = 1,
+  rel_widths = c(3.5,0.65,0.65)
+)
+row2
+
+row3b <- plot_grid(
+  gset.plots[[8]], gset.plots[[7]],
+  ncol = 2, nrow = 1,
+  rel_widths = c(1,2.4)
+)
+row3b
+
+row3_slamf <- plot_grid(
+  gset.plots[[11]],
+  ncol = 1, nrow = 1
+)
+row3_slamf
+
+row3a <- plot_grid(
+  gset.plots[[1]], row3b,
+  ncol = 1, nrow = 2,
+  rel_widths = c(1,1)
+)
+row3a
+
+row3 <- plot_grid(
+  row3a, row3_slamf,
+  ncol = 2, nrow = 1,
+  rel_widths = c(1,0.15)
+)
+row3
+
+suppl.fig1 <- plot_grid(
+  row1,row2,row3,
+  nrow = 3, ncol = 1,
+  rel_heights = c(1,1,2)
+)
+suppl.fig1
+
+suppl.fig1_backg <- suppl.fig1 +
+  theme(plot.background = element_rect(fill = "white", color = NA))
+
+save_plot(
+  "figures_def2026/Suppl-Fig1_v8.tiff", 
+  suppl.fig1_backg,
+  base_width = 385 / 25.4,
+  base_height = 220 / 25.4, 
+  dpi = 600       
+)

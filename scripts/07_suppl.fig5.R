@@ -244,3 +244,89 @@ heatmap_pancan <- setNames(heatmap_pancan, geneset_names)
 
 # Generate figure
 res.suppl.fig5 <- supp.figure5(heatmap_all, heatmap_crc, heatmap_pancan, heatmap_melan, geneset_names)
+
+
+final_plot5 <- lapply(res.suppl.fig5, as.ggplot)
+
+
+suppl.fig5_1.1 <- plot_grid(
+  final_plot5[["Activating KIR-L"]], 
+  final_plot5[["Inhibitory KIR-L"]],
+  final_plot5[["Activating NK receptors"]],
+  ncol = 1, nrow = 3,
+  rel_heights = c(0.8,0.8,2.2)
+)
+suppl.fig5_1.1
+
+
+suppl.fig5_1.2 <- plot_grid(
+  final_plot5[["Inhibitory NK receptors"]], 
+  final_plot5[["CD300 family"]],
+  final_plot5[["Emerging checkpoints"]],
+  final_plot5[["SIGLEC family"]],
+  final_plot5[["SLAMF  family"]],
+  ncol = 1, nrow = 5,
+  rel_heights = c(1.3,0.5,0.8,0.8,1)
+)
+suppl.fig5_1.2
+
+
+suppl.fig5_1<- plot_grid(
+  suppl.fig5_1.1, nullGrob(),suppl.fig5_1.2,
+  ncol = 3, nrow =1,
+  rel_widths = c(1, 0.05, 1)
+)
+suppl.fig5_1
+
+# suppl.fig5_1.backg <- suppl.fig5_1 +
+#   theme(plot.background = element_rect(fill = "white", color = NA))
+
+
+suppl.fig5_2.1 <- plot_grid(
+  final_plot5[["Emerging checkpoints ligands"]], 
+  final_plot5[["HLA-I"]],
+  final_plot5[["HLA-II"]],
+  ncol = 1, nrow = 3,
+  rel_heights = c(1,1,1)
+)
+suppl.fig5_2.1
+
+
+suppl.fig5_2.2 <- plot_grid(
+  final_plot5[["Activating Ligands"]],
+  final_plot5[["Inhibitory Ligands"]],
+  final_plot5[["NK activation marker"]],
+  ncol = 1, nrow = 3,
+  rel_heights = c(2,1.1,1.9)
+)
+suppl.fig5_2.2
+
+suppl.fig5_2 <- plot_grid(
+  suppl.fig5_2.1, nullGrob(),suppl.fig5_2.2,
+  ncol = 3, nrow =1,
+  rel_widths = c(1, 0.05, 1)
+)
+suppl.fig5_2
+
+# suppl.fig5_2.backg <- suppl.fig5_2 +
+#   theme(plot.background = element_rect(fill = "white", color = NA))
+
+
+suppl.fig5 <- plot_grid(
+  suppl.fig5_1,
+  suppl.fig5_2, 
+  ncol = 1, nrow = 2,
+  rel_heights = c(1,1)
+)
+suppl.fig5
+
+suppl.fig5.backg <- suppl.fig5 +
+  theme(plot.background = element_rect(fill = "white", color = NA))
+
+save_plot(
+  "figures_def2026/Supp-Fig5_v1.tiff", 
+  suppl.fig5.backg,
+  base_width = 370 / 25.4,
+  base_height = 420 / 25.4, 
+  dpi = 600       
+)

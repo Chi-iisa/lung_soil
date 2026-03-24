@@ -541,17 +541,14 @@ supp.figure5 <- function(heat1, heat2, heat3, heat4, g_names){
 }
 
 
+
 gs.sign.boxplot <- function(clin_data, exp_data, sign.gene.vector, sign.gs.vector, geneset){
   pos.consulta <- which(sign.gs.vector == geneset)
   genes.gs <- sign.gene.vector[pos.consulta]
   
   res <- lapply(genes.gs, function(g) boxplot_gene_livlun(clin_data, exp_data, g))
   ncol.grid <- length(res)
-  res.patch <- wrap_plots(res, ncol = case_when(
-    (geneset %in% c('Activating Ligands', 'HLA-II')) ~ 4,
-    geneset =='Activating NK receptors' ~ 5,
-    TRUE ~ 6)
-  )
+  res.patch <- wrap_plots(res, ncol = ncol.grid)
   
   group_text <- ifelse(grepl("Ligands", geneset),
                        paste0(toupper(substr(geneset,1,1)), 
@@ -570,7 +567,8 @@ gs.sign.boxplot.all <- function(clin_data, exp_data, sign.gene.vector, sign.gs.v
   genes.gs <- sign.gene.vector[pos.consulta]
   res <- lapply(genes.gs, function(g) boxplot_gene_axis(clin_data, exp_data, g))
   ncol.grid <- length(res)
-  res.patch <- wrap_plots(res, ncol = ifelse(geneset == 'Activating NK receptors', 3, 4))
+  res.patch <- wrap_plots(res, ncol = 
+                            ifelse(geneset == 'SLAMF  family', 1, ncol.grid))
   
   group_text <- ifelse(grepl("Ligands", geneset),
                        paste0(toupper(substr(geneset,1,1)), 

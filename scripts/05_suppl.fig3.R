@@ -79,7 +79,7 @@ boxplot_axis <- function(clin_data, exp_data, gene, y_axis = FALSE, y_lim = NULL
                                  y = .data[[gene]],
                                  color = TUMOR_SITE)) +
         stat_boxplot(geom = "errorbar", width = 0.2) +
-        geom_boxplot(fill = "white", size = 0.8) +
+        geom_boxplot(fill = "white", size = 0.7) +
         
         scale_color_manual(values = c(
           "Lung" = "green3",
@@ -90,7 +90,7 @@ boxplot_axis <- function(clin_data, exp_data, gene, y_axis = FALSE, y_lim = NULL
           x = gene,
           color = NULL) +
         
-        theme_classic(base_size = 10) +
+        theme_classic(base_size = 7.5) +
         
         theme(
           legend.position = "right",
@@ -101,7 +101,7 @@ boxplot_axis <- function(clin_data, exp_data, gene, y_axis = FALSE, y_lim = NULL
         annotate("text", x = Inf, y = Inf, 
                  label = paste('p = ', ifelse(pv < 1e-5, format(pv, scientific = TRUE, digits = 4),
                                               round(pv, digits = 5))),
-                 hjust = 1.1, vjust = 1.3, size = 3.5)
+                 hjust = 1.1, vjust = 1.3, size = 2.7)
       
       if (!is.null(y_lim)) {
         g <- g + coord_cartesian(ylim = y_lim)
@@ -116,7 +116,7 @@ boxplot_axis <- function(clin_data, exp_data, gene, y_axis = FALSE, y_lim = NULL
         )
       } else {
         g <- g + theme(
-          axis.text.y = element_text(size = 8)
+          axis.text.y = element_text(size = 7.1)
         )
       }
       return(g)
@@ -129,7 +129,7 @@ boxplot_axis <- function(clin_data, exp_data, gene, y_axis = FALSE, y_lim = NULL
                                  y = .data[[gene]],
                                  color = TUMOR_SITE)) +
         stat_boxplot(geom = "errorbar", width = 0.2) +
-        geom_boxplot(fill = "white", size = 0.8) +
+        geom_boxplot(fill = "white", size = 0.7) +
         
         scale_color_manual(values = c(
           "Lung" = "green3",
@@ -140,7 +140,7 @@ boxplot_axis <- function(clin_data, exp_data, gene, y_axis = FALSE, y_lim = NULL
           x = gene,
           color = NULL) +
         
-        theme_classic(base_size = 10) +
+        theme_classic(base_size = 7.5) +
         
         theme(
           legend.position = "right",
@@ -151,7 +151,7 @@ boxplot_axis <- function(clin_data, exp_data, gene, y_axis = FALSE, y_lim = NULL
         annotate("text", x = Inf, y = Inf, 
                  label = paste('p = ', ifelse(pv < 1e-5, format(pv, scientific = TRUE, digits = 4),
                                               round(pv, digits = 5))),
-                 hjust = 1.1, vjust = 1.3, size = 3.5) 
+                 hjust = 1.1, vjust = 1.3, size = 2.7) 
       
       if (!is.null(y_lim)) {
         g <- g + coord_cartesian(ylim = y_lim)
@@ -166,7 +166,7 @@ boxplot_axis <- function(clin_data, exp_data, gene, y_axis = FALSE, y_lim = NULL
         )
       } else {
         g <- g + theme(
-          axis.text.y = element_text(size = 8)
+          axis.text.y = element_text(size = 7.1)
         )
       }
       
@@ -202,19 +202,12 @@ combined <- wrap_plots(t_plots, ncol = 4) +
 
 grid.newpage()
 grid.draw(combined)
-ggsave(
-  "figures_def2026/Suppl-Fig3a.tiff", combined, device = "tiff",
-  width = 180, height = 130, units = "mm", dpi = 600, compression = "lzw"
-)
+
 
 ## Suppl Figure 3b
 nk <- boxplot_axis(samples_pancan, consensus,'NK cells', y_axis = TRUE)
 grid.newpage()
 grid.draw(nk)
-ggsave(
-  "figures_def2026/Suppl-Fig3b.tiff", nk, device = "tiff",
-  width = 88, height = 70, units = "mm", dpi = 600, compression = "lzw"
-)
 
 
 ## Suppl Figure 3C
@@ -253,18 +246,13 @@ p <- pheatmap(
   cluster_rows = hcl2,     
   show_rownames = TRUE,                    
   show_colnames = FALSE,                   
-  fontsize_row = 10,                    
-  annotation_col = annotation,             
-  annotation_colors = annotation_colors,   
+  fontsize = 6,
+  fontsize_row = 6,
+  annotation_col = annotation,
+  annotation_colors = annotation_colors,
   legend = TRUE,
-  border_color= NA
+  border_color = NA
 )
-
-ggsave(
-  "figures_def2026/Suppl-Fig3c.tiff", p, device = "tiff",
-  width = 180, height = 130, units = "mm", dpi = 600, compression = "lzw", bg ='white'
-)
-
 
 
 ## Suppl Figure 3d - TIS enrichment
@@ -283,10 +271,6 @@ write.table(GSVA, file="figures_def2026/results/pancan_tis_signature.txt", sep="
 file.tis.pancan <-'results/pancan_tis_signature.txt'
 tis.pancan <- plot.tis.ips(clin_pancan, file.tis.pancan, 'Pancreas', 'TIS', y_axis = TRUE)
 grid.draw(tis.pancan)
-ggsave(
-  "figures_def2026/Suppl-Fig3d.tiff", tis.pancan, device = "tiff",
-  width = 88, height = 70, units = "mm", dpi = 600, compression = "lzw"
-)
 
 ## Suppl Figure 3E - IPS
 library(devtools)
@@ -365,10 +349,50 @@ ips <- t(DF)
 write.table(ips,file="figures_def2026/results/IPS_scores_pancan.txt",
             row.names=TRUE, col.names=TRUE, quote=FALSE,sep="\t")
 # Plot
-file.ips.pancan <-"figures_def2026/results/IPS_scores_pancan.txt"
+file.ips.pancan <-"results/IPS_scores_pancan.txt"
 ips.pancan <- plot.tis.ips(clin_pancan, file.ips.pancan, 'Pancreas', 'IPS', y_axis = TRUE)
 grid.draw(ips.pancan)
-ggsave(
-  "figures_def2026/Suppl-Fig3e.tiff", ips.pancan, device = "tiff",
-  width = 88, height = 70, units = "mm", dpi = 600, compression = "lzw"
+
+
+
+library(patchwork)
+library(cowplot)
+library(ggplotify)
+
+
+supp.fig3_1 <- plot_grid(
+  combined, nk,
+  labels = c("a", "b"),
+  label_size = 14,
+  label_fontface = "bold",
+  ncol = 2, nrow = 1,
+  rel_widths = c(2,1)
+)
+supp.fig3_1
+
+supp.fig3_2 <- plot_grid(
+  p$gtable,  tis.pancan, ips.pancan,
+  labels = c("c", "d", "e"),
+  label_size = 14,
+  label_fontface = "bold",
+  ncol = 3, nrow = 1,
+  rel_widths = c(2,1,1)
+)
+supp.fig3_2
+
+supp.fig3 <- plot_grid(
+  supp.fig3_1,supp.fig3_2,
+  ncol = 1, nrow = 2
+)
+supp.fig3
+
+supp.fig3_background <- supp.fig3 +
+  theme(plot.background = element_rect(fill = "white", color = NA))
+
+save_plot(
+  "figures_def2026/Supp-Figure3_v2.tiff", 
+  supp.fig3_background,
+  base_width = 200 / 25.4,
+  base_height = 160 / 25.4, 
+  dpi = 600       
 )

@@ -47,12 +47,12 @@ boxplot_axis <- function(clin_data, exp_data, gene, y_axis = FALSE, y_lim = NULL
       anova_result <- aov(merged_df[, pos] ~ MET_SITE, data = merged_df)
       pv <- summary(anova_result)[[1]]$`Pr(>F)`[1]
       
-
+      
       g <- ggplot(merged_df, aes(x = MET_SITE,
                                  y = .data[[gene]],
                                  color = MET_SITE)) +
         stat_boxplot(geom = "errorbar", width = 0.2) +
-        geom_boxplot(fill = "white", size = 0.8) +
+        geom_boxplot(fill = "white", size = 0.7) +
         
         scale_color_manual(values = c(
           "Lung" = "green3",
@@ -65,7 +65,7 @@ boxplot_axis <- function(clin_data, exp_data, gene, y_axis = FALSE, y_lim = NULL
           x = gene,
           color = NULL) +
         
-        theme_classic(base_size = 10) +
+        theme_classic(base_size = 7.5) +
         
         theme(
           legend.position = "right",
@@ -76,7 +76,7 @@ boxplot_axis <- function(clin_data, exp_data, gene, y_axis = FALSE, y_lim = NULL
         annotate("text", x = Inf, y = Inf, 
                  label = paste('p = ', ifelse(pv < 1e-5, format(pv, scientific = TRUE, digits = 4),
                                               round(pv, digits = 5))),
-                 hjust = 1.1, vjust = 1.3, size = 3.5)
+                 hjust = 1.1, vjust = 1.3, size = 2.7)
       
       if (!is.null(y_lim)) {
         g <- g + coord_cartesian(ylim = y_lim)
@@ -91,7 +91,7 @@ boxplot_axis <- function(clin_data, exp_data, gene, y_axis = FALSE, y_lim = NULL
         )
       } else {
         g <- g + theme(
-          axis.text.y = element_text(size = 8)
+          axis.text.y = element_text(size = 7.1)
         )
       }
       return(g)
@@ -104,7 +104,7 @@ boxplot_axis <- function(clin_data, exp_data, gene, y_axis = FALSE, y_lim = NULL
                                  y = .data[[gene]],
                                  color = MET_SITE)) +
         stat_boxplot(geom = "errorbar", width = 0.2) +
-        geom_boxplot(fill = "white", size = 0.8) +
+        geom_boxplot(fill = "white", size = 0.7) +
         
         scale_color_manual(values = c(
           "Lung" = "green3",
@@ -117,7 +117,7 @@ boxplot_axis <- function(clin_data, exp_data, gene, y_axis = FALSE, y_lim = NULL
           x = gene,
           color = NULL) +
         
-        theme_classic(base_size = 10) +
+        theme_classic(base_size = 7.5) +
         
         theme(
           legend.position = "right",
@@ -128,7 +128,7 @@ boxplot_axis <- function(clin_data, exp_data, gene, y_axis = FALSE, y_lim = NULL
         annotate("text", x = Inf, y = Inf, 
                  label = paste('p = ', ifelse(pv < 1e-5, format(pv, scientific = TRUE, digits = 4),
                                               round(pv, digits = 5))),
-                 hjust = 1.1, vjust = 1.3, size = 3.5) 
+                 hjust = 1.1, vjust = 1.3, size = 2.7) 
       
       if (!is.null(y_lim)) {
         g <- g + coord_cartesian(ylim = y_lim)
@@ -143,7 +143,7 @@ boxplot_axis <- function(clin_data, exp_data, gene, y_axis = FALSE, y_lim = NULL
         )
       } else {
         g <- g + theme(
-          axis.text.y = element_text(size = 8)
+          axis.text.y = element_text(size = 7.1)
         )
       }
       
@@ -169,7 +169,7 @@ y_lim <- c(-0.5, 0.5)
 for (i in seq_along(t_cells)) {
   y_axis <- ((i - 1) %% ncol == 0)
   t_plots[[i]] <- boxplot_axis(samples_all, consensus, t_cells[i], 
-                     y_axis = y_axis, y_lim = y_lim)
+                               y_axis = y_axis, y_lim = y_lim)
 }
 
 library(patchwork)
@@ -177,45 +177,12 @@ combined <- wrap_plots(t_plots, ncol = 4) +
   plot_layout(guides = "collect") &
   theme(legend.position = "right")
 
-# ggsave(
-#   "prubas/tcell_figure.tiff",
-#   combined,
-#   device = "tiff",
-#   width = 180,
-#   height = 130,
-#   units = "mm",
-#   dpi = 600,
-#   compression = "lzw"
-# )
-
-ggsave(
-  "figures_def2026/Fig1_A.tiff", combined, device = "tiff",
-  width = 180, height = 130, units = "mm", dpi = 600, compression = "lzw"
-)
-
 
 ## Figure 1B
 
 nk <- boxplot_axis(samples_all, consensus,'NK cells', y_axis = TRUE)
 grid.newpage()
 grid.draw(nk)
-
-# ggsave(
-#   "prubas/NKcell_figure.tiff",
-#   nk,
-#   device = "tiff",
-#   width = 88,
-#   height = 70,
-#   units = "mm",
-#   dpi = 600,
-#   compression = "lzw"
-# )
-
-ggsave(
-  "figures_def2026/Fig1_B.tiff", nk, device = "tiff",
-  width = 88, height = 70, units = "mm", dpi = 600, compression = "lzw"
-)
-
 
 
 ## Figure 1C
@@ -352,10 +319,12 @@ for (k in seq_along(cluster_df$GEO_ID)){
 annotation <- data.frame(Metastatic_site = cluster_df$MET_SITE
 )
 row.names(annotation) <- samples_all$GEO_ID
-annotation_colors <- list(Metastatic_site = c(Liver = "darkorange", 
-                                              Lung = "green3",
+annotation_colors <- list(Metastatic_site = c(Bone = 'mediumpurple3',
                                               Brain = 'maroon2' ,
-                                              Bone = 'mediumpurple3')
+                                              Liver = "darkorange", 
+                                              Lung = "green3"
+                                              
+)
 )
 
 
@@ -368,16 +337,12 @@ p <- pheatmap(
   cutree_cols = 3,
   show_rownames = TRUE,
   show_colnames = FALSE,
-  fontsize_row = 11,
+  fontsize = 6,
+  fontsize_row = 6,
   annotation_col = annotation,
   annotation_colors = annotation_colors,
   legend = TRUE,
-  border_color= NA
-)
-
-ggsave(
-  "figures_def2026/Fig1_C.tiff", p, device = "tiff",
-  width = 180, height = 130, units = "mm", dpi = 600, compression = "lzw", bg ='white'
+  silent = TRUE
 )
 
 
@@ -398,21 +363,37 @@ s_staked <- ggplot(cluster_df, aes(x = cluster, fill = MET_SITE)) +
   labs(fill = "Metastatic_site", y = 'Frequency (%)') +
   theme_minimal()+
   theme(
-    axis.text.x = element_text(size = 7),
-    axis.text.y = element_text(size = 7),
+    axis.text.x = element_text(size = 7.5, angle = 45),
+    axis.text.y = element_text(size = 7.5),
     axis.title.x = element_blank(),
     axis.title.y = element_text(size = 7.5),
-    legend.title = element_text(size = 6),
-    legend.text  = element_text(size = 6))
+    legend.title = element_blank(),
+    legend.text  = element_text(size = 7))
 
 s_staked
 
-# ggsave(
-#   "prubas/Fig1_D.tiff", s_staked, device = "tiff",
-#   width = 88, height = 70, units = "mm", dpi = 600, compression = "lzw"
-# )
 
-ggsave(
-  "figures_def2026/Fig1_D.tiff", s_staked, device = "tiff",
-  width = 88, height = 70, units = "mm", dpi = 600, compression = "lzw"
+library(patchwork)
+library(cowplot)
+library(ggplotify)
+
+fig1 <- plot_grid(
+  combined, nk,p$gtable,  s_staked,
+  labels = c("a", "b", "c", "d"),
+  label_size = 14,
+  label_fontface = "bold",
+  ncol = 2, nrow = 2,
+  rel_widths = c(2,1)
+)
+fig1
+
+fig1_background <- fig1 +
+  theme(plot.background = element_rect(fill = "white", color = NA))
+
+save_plot(
+  "figures_def2026/Figure1_v5.tiff", 
+  fig1_background,
+  base_width = 200 / 25.4,
+  base_height = 160 / 25.4, 
+  dpi = 600       
 )
