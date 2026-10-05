@@ -134,7 +134,7 @@ boxplot_axis <- function(clin_data, exp_data, gene, y_axis = FALSE, y_lim = NULL
           "Lung" = "green3",
           "Liver" = "darkorange")) +
         
-        labs(#title = gene,
+        labs(
           y = if (y_axis) "Enrichment score" else NULL,
           x = gene,
           color = NULL) +
@@ -208,7 +208,6 @@ grid.newpage()
 grid.draw(nk)
 
 
-
 ## Suppl Figure 4C
 # Prepare data
 ex_mel_sign <- ex_mel[sig_genes_mel,]
@@ -255,7 +254,6 @@ p <- pheatmap(
 
 
 
-
 ## Suppl Figure 4d - TIS enrichment
 # genes selected
 TIS.gset <- list('TIS' = c("CCL5", "CD27", "CD274", "CD276", "CD8A", "CMKLR1", "CXCL9", "HLA-DQA1", "HLA-DRB1", "HLA-E", "IDO1", "LAG3", "NKG7", "PDCD1LG2", "PSMB10", "STAT1", "TIGIT"))
@@ -275,9 +273,6 @@ grid.draw(tis.mel)
 
 
 ## Suppl Figure 4E - IPS
-library(devtools)
-library(MCPcounter); library(estimate)
-
 # Run Immunophenoscore
 ipsmap <- function (x) {
   if (x<=0) {
@@ -357,10 +352,10 @@ grid.draw(ips.mel)
 
 
 
+
 library(patchwork)
 library(cowplot)
 library(ggplotify)
-
 
 supp.fig4_1 <- plot_grid(
   combined, nk,
@@ -385,17 +380,10 @@ supp.fig4_2
 supp.fig4 <- plot_grid(
   supp.fig4_1,supp.fig4_2,
   ncol = 1, nrow = 2,
-  rel_heights = c(1,0.75)
+  rel_heights = c(1,1)
 )
 supp.fig4
 
 supp.fig4_background <- supp.fig4 +
   theme(plot.background = element_rect(fill = "white", color = NA))
-
-save_plot(
-  "figures_def2026/Supp-Figure4_v1.tiff", 
-  supp.fig4_background,
-  base_width = 200 / 25.4,
-  base_height = 140 / 25.4,
-  dpi = 600       
-)
+supp.fig4_background

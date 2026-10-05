@@ -441,7 +441,7 @@ heatmap_zscore_sign <- function(ex_filtered_ini, samples_keep,
     } else{
       mt_filtered <- median_expression_scaled[filtered_geneset_vector,]
     }
-
+    
     
     if(any(duplicated(rownames(mt_filtered)))){
       rownames(asterisks_labels) <- gsub("\\-", ".", rownames(asterisks_labels))
@@ -525,21 +525,21 @@ supp.figure5 <- function(heat1, heat2, heat3, heat4, g_names){
       ncol = max_cols
     )
     
-    # h <- onvertHeight(sum(row_layout$heights), "mm", TRUE)
+    layout_list[[group_gene]] <- row_layout
     
     sizes <- lapply(gtable_list, get_grob_size_mm)
     heights <- sapply(sizes, `[[`, "height")
     
     h <- max(heights) + 20
     
-    ggsave(paste0("figures_def2026/Suppl-Fig5-",i,'_',gsub(" ", "_", group_gene),".tiff"),
+    ggsave(paste0("figures_mar26/Suppl-Fig5-",i,'_',gsub(" ", "_", group_gene),".tiff"),
            row_layout, device = "tiff", width = 180, height = h, units = "mm", 
            dpi = 600, compression = "lzw", bg = 'white')
     
     print(paste0('Saved: ', group_gene))
   }
+  return(layout_list)
 }
-
 
 
 gs.sign.boxplot <- function(clin_data, exp_data, sign.gene.vector, sign.gs.vector, geneset){
@@ -586,18 +586,20 @@ gs.sign.boxplot.all <- function(clin_data, exp_data, sign.gene.vector, sign.gs.v
 
 
 plot.tis.ips <- function(clin_data, file.data, dataset, score, y_axis = FALSE, y_lim = NULL){
-  
-  if (score =='TIS'){
-    title <- 'TIS (T-Cell inflammatory signature)'
+  # title <- 'Metastatic site'
+  if (score =='TIS'){ # Tumor inflammation signature
+    title <- 'TIS'
+    title_y <- 'Enrichment score'
     t <- read.table(file.data)
     data_score <- as.numeric(t[,1])
-  } else if (score =='IPS') {
-    title <- 'Immunophenoscore'
+  } else if (score =='IPS') { # immunophenoscore
+    title <- 'IPS'
+    title_y <- 'Z-score'
     t <- as.data.frame(t(read.table(file.data)))
     data_score <- t$IPS
   }
   
-  if(dataset %in% c('Melanoma', 'CRC', 'All')){
+  if(dataset %in% c('Melanoma', 'CRC')){
     t$GEO_ID <- rownames(t)
     merged_df <- merge(clin_data, t, by = "GEO_ID")
     merged_df$MET_SITE <- factor(merged_df$MET_SITE) # factor type
@@ -654,11 +656,11 @@ plot.tis.ips <- function(clin_data, file.data, dataset, score, y_axis = FALSE, y
           "Lung" = "green3",
           "Liver" = "darkorange")) +
         
-        labs(y = if (y_axis) "Enrichment score" else NULL,
+        labs(y = if (y_axis) title_y else NULL,
              x = title,
              color = NULL) +
         
-        theme_classic(base_size = 10) +
+        theme_classic(base_size = 7.5) +
         
         theme(
           legend.position = "right",
@@ -667,9 +669,9 @@ plot.tis.ips <- function(clin_data, file.data, dataset, score, y_axis = FALSE, y
           axis.line = element_line(size = 0.3)) +
         
         annotate("text", x = Inf, y = Inf, 
-                 label = paste('p = ', ifelse(pv < 1e-5, format(pv, scientific = TRUE, digits = 4),
-                                              round(pv, digits = 5))),
-                 hjust = 1.1, vjust = 1.3, size = 3.5)
+                 label = paste('p = ', ifelse(pv < 1e-4, format(pv, scientific = TRUE, digits = 2),
+                                              round(pv, digits = 3))),
+                 hjust = 1.1, vjust = 1.3, size = 2.7)
       
       if (!is.null(y_lim)) {
         g <- g + coord_cartesian(ylim = y_lim)
@@ -684,7 +686,7 @@ plot.tis.ips <- function(clin_data, file.data, dataset, score, y_axis = FALSE, y
         )
       } else {
         g <- g + theme(
-          axis.text.y = element_text(size = 8)
+          axis.text.y = element_text(size = 7.1)
         )
       }
       return(g)
@@ -702,11 +704,11 @@ plot.tis.ips <- function(clin_data, file.data, dataset, score, y_axis = FALSE, y
           "Lung" = "green3",
           "Liver" = "darkorange")) +
         
-        labs(y = if (y_axis) "Enrichment score" else NULL,
+        labs(y = if (y_axis) title_y else NULL,
              x = title,
              color = NULL) +
         
-        theme_classic(base_size = 10) +
+        theme_classic(base_size = 7.5) +
         
         theme(
           legend.position = "right",
@@ -715,9 +717,9 @@ plot.tis.ips <- function(clin_data, file.data, dataset, score, y_axis = FALSE, y
           axis.line = element_line(size = 0.3)) +
         
         annotate("text", x = Inf, y = Inf, 
-                 label = paste('p = ', ifelse(pv < 1e-5, format(pv, scientific = TRUE, digits = 4),
-                                              round(pv, digits = 5))),
-                 hjust = 1.1, vjust = 1.3, size = 3.5) 
+                 label = paste('p = ', ifelse(pv < 1e-4, format(pv, scientific = TRUE, digits = 2),
+                                              round(pv, digits = 3))),
+                 hjust = 1.1, vjust = 1.3, size = 2.7) 
       
       if (!is.null(y_lim)) {
         g <- g + coord_cartesian(ylim = y_lim)
@@ -732,13 +734,139 @@ plot.tis.ips <- function(clin_data, file.data, dataset, score, y_axis = FALSE, y
         )
       } else {
         g <- g + theme(
-          axis.text.y = element_text(size = 8)
+          axis.text.y = element_text(size = 7.1)
         )
       }
       
       return(g)
     }
-  } else if (dataset =='Pancreas'){
+  } else if (dataset =='All'){
+    rownames(t) <- gsub("\\.", "-", rownames(t))
+    t$GEO_ID <- rownames(t)
+    merged_df <- merge(clin_data, t, by = "GEO_ID")
+    merged_df$MET_SITE <- factor(merged_df$MET_SITE) # factor type
+    
+    count_df <- merged_df %>% 
+      group_by(MET_SITE) %>% 
+      summarise(count = n())
+    
+    # Keep samples with N > 1
+    filtered_sites <- count_df$count > 1
+    filtered_sites <- count_df$MET_SITE[filtered_sites]
+    
+    # Filter original dataframe
+    merged_df <- merged_df %>% 
+      filter(MET_SITE %in% filtered_sites)
+    
+    data_score <- as.numeric(t[,1])
+    # Verify if it follows a normal distribution 
+    print(paste("Normality test for type:", score))
+    km <- ks.test(data_score, "pnorm", mean=mean(data_score), sd=sd(data_score))
+    print(km)
+    
+    if(km$p.value >= 0.05) {
+      # ANOVA test
+      anova_result <- aov(merged_df[, score] ~ MET_SITE, data = merged_df)
+      pv <- summary(anova_result)[[1]]$`Pr(>F)`[1]
+      g <- ggplot(merged_df, aes(x = MET_SITE,
+                                 y = .data[[score]],
+                                 color = MET_SITE)) +
+        stat_boxplot(geom = "errorbar", width = 0.2) +
+        geom_boxplot(fill = "white", size = 0.7) +
+        
+        scale_color_manual(values = c(
+          "Lung" = "green3",
+          "Brain" = "maroon2",
+          "Bone" = "mediumpurple3",
+          "Liver" = "darkorange")) +
+        
+        labs(y = if (y_axis) title_y else NULL,
+             x = title,
+             color = NULL) +
+        
+        theme_classic(base_size = 7.5) +
+        
+        theme(
+          legend.position = "right",
+          axis.text.x = element_blank(),
+          axis.ticks.x = element_blank(),
+          axis.line = element_line(size = 0.3)) +
+        
+        annotate("text", x = Inf, y = Inf, 
+                 label = paste('p = ', ifelse(pv < 1e-4, format(pv, scientific = TRUE, digits = 2),
+                                              round(pv, digits = 3))),
+                 hjust = 1.1, vjust = 1.3, size = 2.7)
+      
+      if (!is.null(y_lim)) {
+        g <- g + coord_cartesian(ylim = y_lim)
+      }
+      
+      if (!y_axis) {
+        g <- g + theme(
+          axis.text.y = element_blank(),
+          axis.ticks.y = element_blank(),
+          axis.title.y = element_blank(),
+          axis.line.y = element_blank()
+        )
+      } else {
+        g <- g + theme(
+          axis.text.y = element_text(size = 7.1)
+        )
+      }
+      return(g)
+    } else{
+      # Kruskal Wallis
+      kr_result <- kruskal.test(merged_df[, score] ~ MET_SITE, data = merged_df)
+      pv <- kr_result$p.value
+      g <- ggplot(merged_df, aes(x = MET_SITE,
+                                 y = .data[[score]],
+                                 color = MET_SITE)) +
+        stat_boxplot(geom = "errorbar", width = 0.2) +
+        geom_boxplot(fill = "white", size = 0.7) +
+        
+        scale_color_manual(values = c(
+          "Lung" = "green3",
+          "Brain" = "maroon2",
+          "Bone" = "mediumpurple3",
+          "Liver" = "darkorange")) +
+        
+        labs(y = if (y_axis) title_y else NULL,
+             x = title,
+             color = NULL) +
+        
+        theme_classic(base_size = 7.5) +
+        
+        theme(
+          legend.position = "right",
+          axis.text.x = element_blank(),
+          axis.ticks.x = element_blank(),
+          axis.line = element_line(size = 0.3)) +
+        
+        annotate("text", x = Inf, y = Inf, 
+                 label = paste('p = ', ifelse(pv < 1e-4, format(pv, scientific = TRUE, digits = 2),
+                                              round(pv, digits = 3))),
+                 hjust = 1.1, vjust = 1.3, size = 2.7) 
+      
+      if (!is.null(y_lim)) {
+        g <- g + coord_cartesian(ylim = y_lim)
+      }
+      
+      if (!y_axis) {
+        g <- g + theme(
+          axis.text.y = element_blank(),
+          axis.ticks.y = element_blank(),
+          axis.title.y = element_blank(),
+          axis.line.y = element_blank()
+        )
+      } else {
+        g <- g + theme(
+          axis.text.y = element_text(size = 7.1)
+        )
+      }
+      
+      return(g)
+    }
+  } else if(dataset =='Pancreas'){
     rownames(t) <- gsub("\\.", "-", rownames(t))
     t$SAMPLE_ID <- rownames(t)
     merged_df <- merge(clin_data, t, by = "SAMPLE_ID")
@@ -790,28 +918,29 @@ plot.tis.ips <- function(clin_data, file.data, dataset, score, y_axis = FALSE, y
                                  y = .data[[score]],
                                  color = TUMOR_SITE)) +
         stat_boxplot(geom = "errorbar", width = 0.2) +
-        geom_boxplot(fill = "white", size = 0.8) +
+        geom_boxplot(fill = "white", size = 0.7) +
         
         scale_color_manual(values = c(
           "Lung" = "green3",
           "Liver" = "darkorange")) +
         
-        labs(y = if (y_axis) "Enrichment score" else NULL,
+        labs(y = if (y_axis) title_y else NULL,
              x = title,
              color = NULL) +
         
-        theme_classic(base_size = 10) +
+        theme_classic(base_size = 7.5) +
         
         theme(
           legend.position = "right",
           axis.text.x = element_blank(),
           axis.ticks.x = element_blank(),
+          # axis.title.x = element_blank(),
           axis.line = element_line(size = 0.3)) +
         
         annotate("text", x = Inf, y = Inf, 
-                 label = paste('p = ', ifelse(pv < 1e-5, format(pv, scientific = TRUE, digits = 4),
-                                              round(pv, digits = 5))),
-                 hjust = 1.1, vjust = 1.3, size = 3.5)
+                 label = paste('p = ', ifelse(pv < 1e-4, format(pv, scientific = TRUE, digits = 2),
+                                              round(pv, digits = 3))),
+                 hjust = 1.1, vjust = 1.3, size = 2.7)
       
       if (!is.null(y_lim)) {
         g <- g + coord_cartesian(ylim = y_lim)
@@ -826,7 +955,7 @@ plot.tis.ips <- function(clin_data, file.data, dataset, score, y_axis = FALSE, y
         )
       } else {
         g <- g + theme(
-          axis.text.y = element_text(size = 8)
+          axis.text.y = element_text(size = 7.1)
         )
       }
       return(g)
@@ -838,28 +967,29 @@ plot.tis.ips <- function(clin_data, file.data, dataset, score, y_axis = FALSE, y
                                  y = .data[[score]],
                                  color = TUMOR_SITE)) +
         stat_boxplot(geom = "errorbar", width = 0.2) +
-        geom_boxplot(fill = "white", size = 0.8) +
+        geom_boxplot(fill = "white", size = 0.7) +
         
         scale_color_manual(values = c(
           "Lung" = "green3",
           "Liver" = "darkorange")) +
         
-        labs(y = if (y_axis) "Enrichment score" else NULL,
+        labs(y = if (y_axis) title_y else NULL,
              x = title,
              color = NULL) +
         
-        theme_classic(base_size = 10) +
+        theme_classic(base_size = 7.5) +
         
         theme(
           legend.position = "right",
           axis.text.x = element_blank(),
           axis.ticks.x = element_blank(),
+          # axis.title.x = element_blank(),
           axis.line = element_line(size = 0.3)) +
         
         annotate("text", x = Inf, y = Inf, 
-                 label = paste('p = ', ifelse(pv < 1e-5, format(pv, scientific = TRUE, digits = 4),
-                                              round(pv, digits = 5))),
-                 hjust = 1.1, vjust = 1.3, size = 3.5) 
+                 label = paste('p = ', ifelse(pv < 1e-4, format(pv, scientific = TRUE, digits = 2),
+                                              round(pv, digits = 3))),
+                 hjust = 1.1, vjust = 1.3, size = 2.7) 
       
       if (!is.null(y_lim)) {
         g <- g + coord_cartesian(ylim = y_lim)
@@ -874,7 +1004,7 @@ plot.tis.ips <- function(clin_data, file.data, dataset, score, y_axis = FALSE, y
         )
       } else {
         g <- g + theme(
-          axis.text.y = element_text(size = 8)
+          axis.text.y = element_text(size = 7.1)
         )
       }
       

@@ -44,17 +44,17 @@ boxplot_axis <- function(clin_data, exp_data, gene, y_axis = FALSE, y_lim = NULL
     if(km$p.value >= 0.05) {
       # t-test
       x <- merged_df %>% 
-        select(GEO_ID, MET_SITE, `g`) %>% 
+        select(GEO_ID, MET_SITE, gene) %>% 
         filter(MET_SITE == 'Lung')
       y <- merged_df %>% 
-        select(GEO_ID, MET_SITE, `g`) %>% 
+        select(GEO_ID, MET_SITE, gene) %>% 
         filter(MET_SITE == 'Liver')
       
-      x[,g] <- as.numeric(x[,g])
-      y[,g] <- as.numeric(y[,g])
+      x[,gene] <- as.numeric(x[,gene])
+      y[,gene] <- as.numeric(y[,gene])
       
-      x_data <- x[,g]
-      y_data <- y[,g]
+      x_data <- x[,gene]
+      y_data <- y[,gene]
       
       if (nrow(x) == 0 || nrow(y) == 0) {
         stop("One of those is empty, it isn't possible to do the t-test")
@@ -69,7 +69,7 @@ boxplot_axis <- function(clin_data, exp_data, gene, y_axis = FALSE, y_lim = NULL
                                  y = .data[[gene]],
                                  color = MET_SITE)) +
         stat_boxplot(geom = "errorbar", width = 0.2) +
-        geom_boxplot(fill = "white", size = 0.8) +
+        geom_boxplot(fill = "white", size = 0.7) +
         scale_color_manual(values = c(
           "Lung" = "green3",
           "Liver" = "darkorange")) +
@@ -224,7 +224,6 @@ p <- pheatmap(
   show_rownames = TRUE,                    
   show_colnames = FALSE,                   
   fontsize = 6,
-  # fontsize_row = 6, 
   fontsize_row = 3.2,
   annotation_col = annotation,             
   annotation_colors = annotation_colors,   
@@ -252,9 +251,6 @@ grid.draw(tis.crc)
 
 
 ## Figure 2E - IPS
-library(devtools)
-library(MCPcounter); library(estimate)
-
 # Run Immunophenoscore
 ipsmap <- function (x) {
   if (x<=0) {
@@ -334,7 +330,6 @@ grid.draw(ips.crc)
 
 
 
-library(patchwork)
 library(cowplot)
 library(ggplotify)
 
@@ -366,11 +361,4 @@ fig2
 
 fig2_background <- fig2 +
   theme(plot.background = element_rect(fill = "white", color = NA))
-
-save_plot(
-  "figures_def2026/Figure2_v8.tiff", 
-  fig2_background,
-  base_width = 200 / 25.4,
-  base_height = 160 / 25.4, 
-  dpi = 600       
-)
+fig2_background

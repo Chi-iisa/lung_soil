@@ -170,6 +170,22 @@ gset.plots <- lapply(unique(geneset_sig.crc),
                      function(g) gs.sign.boxplot(samples_crc, ex_crc,sig_genes_crc, 
                                                  geneset_sig.crc,g))
 
+# for (i in seq(1,length(gset.plots))){
+#   print(i)
+#   print(gset.plots[[i]])
+#   if (!i %in% c(2,3,10)){
+#     ggsave(paste0("figures_def2026/Suppl-Fig2-",i,".tiff"), device = "tiff",
+#            plot = gset.plots[[i]], width = 180, height = 35, units = "mm", dpi = 600,
+#            compression = "lzw")
+#   } else{
+#     ggsave(paste0("figures_def2026/Suppl-Fig2-",i,".tiff"), device = "tiff",
+#            plot = gset.plots[[i]], width = ifelse(i %in% c(2,10), 120,
+#                                                   ifelse(i==3, 150,180)), 
+#            height = 35*2, 
+#            units = "mm", dpi = 600, compression = "lzw")
+#   }
+# }
+
 
 
 library(patchwork)
@@ -220,11 +236,4 @@ suppl.fig2
 
 suppl.fig2_backg <- suppl.fig2 +
   theme(plot.background = element_rect(fill = "white", color = NA))
-
-save_plot(
-  "figures_def2026/Suppl-Fig2_v1.tiff", 
-  suppl.fig2_backg,
-  base_width = 385 / 25.4,
-  base_height = 220 / 25.4, 
-  dpi = 600       
-)
+suppl.fig2_backg

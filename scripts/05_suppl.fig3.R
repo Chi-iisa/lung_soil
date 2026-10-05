@@ -255,6 +255,7 @@ p <- pheatmap(
 )
 
 
+
 ## Suppl Figure 3d - TIS enrichment
 # genes selected
 TIS.gset <- list('TIS' = c("CCL5", "CD27", "CD274", "CD276", "CD8A", "CMKLR1", "CXCL9", "HLA-DQA1", "HLA-DRB1", "HLA-E", "IDO1", "LAG3", "NKG7", "PDCD1LG2", "PSMB10", "STAT1", "TIGIT"))
@@ -265,17 +266,15 @@ GSVA <- gsva(params, verbose = FALSE)
 GSVA <- as.data.frame(t(GSVA))
 
 # Save data
-write.table(GSVA, file="figures_def2026/results/pancan_tis_signature.txt", sep="\t", col.names = T, row.names = T, quote = F)
+write.table(GSVA, file="results/pancan_tis_signature_sept26.txt", sep="\t", col.names = T, row.names = T, quote = F)
 
 # Plot
-file.tis.pancan <-'results/pancan_tis_signature.txt'
+file.tis.pancan <-'results/pancan_tis_signature_sept26.txt'
 tis.pancan <- plot.tis.ips(clin_pancan, file.tis.pancan, 'Pancreas', 'TIS', y_axis = TRUE)
 grid.draw(tis.pancan)
 
-## Suppl Figure 3E - IPS
-library(devtools)
-library(MCPcounter); library(estimate)
 
+## Suppl Figure 3E - IPS
 # Run Immunophenoscore
 ipsmap <- function (x) {
   if (x<=0) {
@@ -346,10 +345,10 @@ DF$SAMPLE <- NULL
 ips <- t(DF)
 
 # Save data
-write.table(ips,file="figures_def2026/results/IPS_scores_pancan.txt",
+write.table(ips,file="results/IPS_scores_pancan_sept26.txt",
             row.names=TRUE, col.names=TRUE, quote=FALSE,sep="\t")
 # Plot
-file.ips.pancan <-"results/IPS_scores_pancan.txt"
+file.ips.pancan <-"results/IPS_scores_pancan_sept26.txt"
 ips.pancan <- plot.tis.ips(clin_pancan, file.ips.pancan, 'Pancreas', 'IPS', y_axis = TRUE)
 grid.draw(ips.pancan)
 
@@ -358,7 +357,6 @@ grid.draw(ips.pancan)
 library(patchwork)
 library(cowplot)
 library(ggplotify)
-
 
 supp.fig3_1 <- plot_grid(
   combined, nk,
@@ -388,11 +386,4 @@ supp.fig3
 
 supp.fig3_background <- supp.fig3 +
   theme(plot.background = element_rect(fill = "white", color = NA))
-
-save_plot(
-  "figures_def2026/Supp-Figure3_v2.tiff", 
-  supp.fig3_background,
-  base_width = 200 / 25.4,
-  base_height = 160 / 25.4, 
-  dpi = 600       
-)
+supp.fig3_background

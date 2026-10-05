@@ -67,14 +67,17 @@ boxplot_gene_axis <- function(clin_data, exp_data, gene,
                                         y = merged_df[, gene],
                                         color = MET_SITE)) +
         stat_boxplot(geom = "errorbar", width = 0.2) +
-        geom_boxplot(fill = 'white', size = 0.8) +
+        geom_boxplot(fill = 'white', size = 0.7) +
         scale_color_manual(values = c("Lung" = "green3", 
                                       'Brain' = 'maroon2', 
                                       'Bone' = 'mediumpurple3', 
                                       'Liver' = 'darkorange')) +
         annotate("text", x = Inf, y = Inf, 
-                 label = paste('p = ', ifelse(pv < 1e-5, format(pv, scientific = TRUE, digits = 4),
-                                              round(pv, digits = 5))),
+                 label = paste('p = ', ifelse(
+                   # pv < 1e-4, format(pv, scientific = TRUE, digits = 2),
+                   pv < 1e-5, format(pv, scientific = TRUE, digits = 4),
+                   round(pv, digits = 5))
+                 ),
                  hjust = 1.1, vjust = 1.3, size = 3) +
         ggtitle(gene) + 
         labs(y = if (y_axis) "Log2 expression" else NULL) +
@@ -106,7 +109,7 @@ boxplot_gene_axis <- function(clin_data, exp_data, gene,
                                         y = merged_df[, gene],
                                         color = MET_SITE)) +
         stat_boxplot(geom = "errorbar", width = 0.2) +
-        geom_boxplot(fill = 'white', size = 0.8) +
+        geom_boxplot(fill = 'white', size = 0.7) +
         scale_color_manual(values = c("Lung" = "green3", 
                                       'Brain' = 'maroon2', 
                                       'Bone' = 'mediumpurple3', 
@@ -144,7 +147,6 @@ boxplot_gene_axis <- function(clin_data, exp_data, gene,
 gset.plots <- lapply(unique(geneset_sig.all),
                      function(g) gs.sign.boxplot.all(samples_all, ex_all, sig_genes_all,
                                                      geneset_sig.all,g))
-
 
 
 library(patchwork)
@@ -201,11 +203,4 @@ suppl.fig1
 
 suppl.fig1_backg <- suppl.fig1 +
   theme(plot.background = element_rect(fill = "white", color = NA))
-
-save_plot(
-  "figures_def2026/Suppl-Fig1_v8.tiff", 
-  suppl.fig1_backg,
-  base_width = 385 / 25.4,
-  base_height = 220 / 25.4, 
-  dpi = 600       
-)
+suppl.fig1_backg

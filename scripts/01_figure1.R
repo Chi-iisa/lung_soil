@@ -308,11 +308,11 @@ for (i in seq_along(samples_all$GEO_ID)){
 
 for (k in seq_along(cluster_df$GEO_ID)){
   if(cluster_df$id_cluster[k] == 1){
-    cluster_df$cluster[k] <- 'Low'
+    cluster_df$cluster[k] <- 'Low_NK'
   } else if(cluster_df$id_cluster[k] == 2){
-    cluster_df$cluster[k] <- 'Medium'
+    cluster_df$cluster[k] <- 'Medium_NK'
   } else if(cluster_df$id_cluster[k] == 3){
-    cluster_df$cluster[k] <- 'High'
+    cluster_df$cluster[k] <- 'High_NK'
   }
 }
 
@@ -322,9 +322,7 @@ row.names(annotation) <- samples_all$GEO_ID
 annotation_colors <- list(Metastatic_site = c(Bone = 'mediumpurple3',
                                               Brain = 'maroon2' ,
                                               Liver = "darkorange", 
-                                              Lung = "green3"
-                                              
-)
+                                              Lung = "green3")
 )
 
 
@@ -349,9 +347,7 @@ p <- pheatmap(
 ## Figure 1D
 
 cluster_df$cluster <- factor(
-  cluster_df$cluster,
-  levels = c("High", "Medium", "Low")
-)
+  cluster_df$cluster, levels = c("High_NK", "Medium_NK", "Low_NK"))
 
 s_staked <- ggplot(cluster_df, aes(x = cluster, fill = MET_SITE)) +
   geom_bar(position = "fill") + 
@@ -363,7 +359,7 @@ s_staked <- ggplot(cluster_df, aes(x = cluster, fill = MET_SITE)) +
   labs(fill = "Metastatic_site", y = 'Frequency (%)') +
   theme_minimal()+
   theme(
-    axis.text.x = element_text(size = 7.5, angle = 45),
+    axis.text.x = element_text(size = 7.5, angle = 45, hjust = 1, vjust = 1),
     axis.text.y = element_text(size = 7.5),
     axis.title.x = element_blank(),
     axis.title.y = element_text(size = 7.5),
@@ -389,11 +385,4 @@ fig1
 
 fig1_background <- fig1 +
   theme(plot.background = element_rect(fill = "white", color = NA))
-
-save_plot(
-  "figures_def2026/Figure1_v5.tiff", 
-  fig1_background,
-  base_width = 200 / 25.4,
-  base_height = 160 / 25.4, 
-  dpi = 600       
-)
+fig1_background
